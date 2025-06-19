@@ -4,14 +4,15 @@ import {Typography} from "@/compnents/Typography";
 import {colors} from "@/constants/theme";
 import {Button} from "@/compnents/Button";
 import Animated, {FadeIn, FadeInDown} from "react-native-reanimated";
+import {useRouter} from "expo-router";
 
 export default function Welcome() {
+    const router = useRouter();
     return (
         <View style={styles.container}>
             <View>
-                <TouchableOpacity onPress={() => {
-                }}>
-                    <Typography size={24} color={colors.text}>Sign In</Typography>
+                <TouchableOpacity onPress={() => {router.push('/(auth)/login')}} style={styles.loginButton}>
+                    <Typography size={24} color={colors.black} fontWeight={'700'}>Sign In</Typography>
                 </TouchableOpacity>
                 <Animated.Image
                     entering={FadeIn.duration(2000)}
@@ -34,7 +35,9 @@ export default function Welcome() {
             </View>
             <Animated.View entering={FadeInDown.duration(1000).delay(200).springify().damping(12)}
                            style={styles.buttonContainer}>
-                <Button>
+                <Button onPress={() => {
+                    router.push('/(auth)/register');
+                }}>
                     <Typography size={22} color={colors.neutral900} fontWeight={'600'}>Get Started</Typography>
                 </Button>
             </Animated.View>
